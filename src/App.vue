@@ -1,21 +1,20 @@
 <script setup>
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import AsideHeader from './components/aside/AsideHeader.vue'
-import ContactsContainer from './components/aside/AsideContainer.vue'
-// import components
+import AsideHeader from "@/components/aside/AsideHeader.vue";
+import AsideContacts from "@/components/aside/AsideContacts.vue";
 </script>
 
 <template>
 
-  <aside>
-    <aside-header/>
-    <contacts-container/>
-  </aside>
+    <aside>
+        <aside-header/>
+        <aside-contacts/>
+    </aside>
 
-  <main>
-    <div></div>
-  </main>
+    <main>
+        <div></div>
+    </main>
 
 </template>
 
@@ -23,14 +22,19 @@ import ContactsContainer from './components/aside/AsideContainer.vue'
 
 </script>
 
-<style scoped>
+<style>
+
 aside {
-  width: 400px;
-  height: 100%;
+    --aside-width: 400px;
+    --aside-header-height: 10%;
+    --aside-contacts-height: 70%;
+
+    width: 400px;
+    height: 100%;
 }
 
 main {
-  width: calc(100% - 400px);
-  height: 100%;
+    width: calc(100% - 400px);
+    height: 100%;
 }
 </style>
