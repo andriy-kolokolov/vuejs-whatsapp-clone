@@ -15,16 +15,18 @@ import AsideHeader from "@/components/aside/AsideHeader.vue";
         <div class="contact" v-for="(contact, index) in filteredContacts"
             :key="index"
             :name="contact.name"
-            :message="contact.messages[0].message"
-            :date="contact.messages.date"
         >
           <div class="contact-avatar-wrapper">
             <img :src="contact.avatar" alt="">
           </div>
           <div class="contact-content">
-            <div class="contact-content__name">{{ contact.name }}</div>
-<!--            <div class="contact-content__message">{{ contact.message.toString() }}</div>-->
-<!--            <div class="contact-content__date">{{ contact.date }}</div>-->
+            <div class="">
+              <div class="contact-content__name">{{ contact.name }}</div>
+              <div class="contact-content__message">{{ contact.messages[0].message }}</div>
+            </div>
+            <div class="">
+              <div class="contact-content__date">{{ contact.messages[0].date }}</div>
+            </div>
           </div>
 
         </div>
@@ -415,4 +417,16 @@ export default {
   border-radius: 50%;
 }
 
+.contact-content__name {
+  font-weight: 700;
+}
+
+.contact-content__message {
+  font-size: .8rem;
+  opacity: .7;
+}
+
+.contact-content__date {
+  font-size: .7rem;
+}
 </style>
