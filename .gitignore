@@ -30,3 +30,5 @@ coverage
 
 !/.vscode/
 
+/.idea/
+/.vscode/extensions.json
