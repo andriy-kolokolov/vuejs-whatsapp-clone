@@ -4,28 +4,29 @@ import AsideHeader from "@/components/aside/AsideHeader.vue";
 </script>
 
 <template>
-  <div class="contacts-main-wrapper">
+  <div class="aside-container">
     <aside-header/>
 
     <notifications-alert/>
 
     <div class="contacts-wrapper">
       <input class="contacts-wrapper__input-search" type="text" v-model="searchTerm"/>
-      <div class="contacts-wrapper__contacts">
+      <div class="contacts-wrapper__contacts" :style="{ width: '100%' }">
         <div class="contact" v-for="(contact, index) in filteredContacts"
             :key="index"
-            :name="contact.name"
         >
-          <div class="contact-avatar-wrapper">
-            <img :src="contact.avatar" alt="">
-          </div>
           <div class="contact-content">
-            <div class="">
-              <div class="contact-content__name">{{ contact.name }}</div>
-              <div class="contact-content__message">{{ contact.messages[0].message }}</div>
+            <div class="contact-content-left">
+              <div class="contact--content__avatar-wrapper">
+                <img :src="contact.avatar" alt="">
+              </div>
+              <div class="contact-content__wrap-name-msg">
+                <div class="contact-content__name">{{ contact.name }}</div>
+                <div class="contact-content__message">{{ contact.messages[0].message }}</div>
+              </div>
             </div>
-            <div class="">
-              <div class="contact-content__date">{{ contact.messages[0].date }}</div>
+            <div class="contact-content-right">
+              <div class="contact-content__date">{{ getTimePassed(contact.messages[0].date) }}</div>
             </div>
           </div>
 
@@ -369,6 +370,27 @@ export default {
 
     }
   },
+  methods: {
+    convertToISO(dateString) {
+      // Split the string into its components
+      const [datePart, timePart] = dateString.split(' ');
+      // Split the date part into day, month, and year
+      const [day, month, year] = datePart.split('/');
+      // Split the time part into hours, minutes, and seconds
+      const [hours, minutes, seconds] = timePart.split(':');
+      // Create a new Date object with the components in ISO format
+      const isoDate = new Date(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}`);
+      return isoDate.toISOString();
+    },
+    getTimePassed(lastMsgDate) {
+      const convertedToISO = this.convertToISO(lastMsgDate);
+      const timeDiff = Math.floor((new Date() - new Date(convertedToISO)) / 1000);
+      if (timeDiff < 60) return `${timeDiff} seconds ago`;
+      if (timeDiff < 3600) return `${Math.floor(timeDiff / 60)} minutes ago`;
+      if (timeDiff < 86400) return `${Math.floor(timeDiff / 3600)} hours ago`;
+      return `${Math.floor(timeDiff / 86400)} days ago`;
+    }
+  },
   computed: {
     filteredContacts() {
       return this.contacts.filter((contact) => {
@@ -380,11 +402,13 @@ export default {
 </script>
 
 <style scoped>
-.contacts-main-wrapper {
+.aside-container {
   --search-height: 30px;
   --contact-height: 80px;
+  --elements-padding: 10px;
 
   height: 100%;
+  width: 400px;
   background-color: white;
 }
 
@@ -403,18 +427,42 @@ export default {
 }
 
 .contact {
+  /*background-color: crimson;*/
   height: var(--contact-height);
   display: flex;
 }
 
-.contact-avatar-wrapper {
-  height: 100%;
-
+.contact-content {
+  display: flex;
+  width: 100%;
 }
 
-.contact-avatar-wrapper img {
+.contact-content-left {
+  display: flex;
+  flex-basis: 80%;
+}
+
+.contact-content-right {
+  flex-basis: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.contact--content__avatar-wrapper {
+  height: 100%;
+  padding: 5px;
+}
+
+.contact--content__avatar-wrapper img {
   height: 100%;
   border-radius: 50%;
+}
+
+.contact-content__wrap-name-msg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: var(--elements-padding);
 }
 
 .contact-content__name {
@@ -429,4 +477,5 @@ export default {
 .contact-content__date {
   font-size: .7rem;
 }
+
 </style>

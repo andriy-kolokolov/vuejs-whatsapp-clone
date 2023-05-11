@@ -14,8 +14,9 @@ import ContactsContainer from './components/aside/AsideContainer.vue'
   </aside>
 
   <main>
-    <div>it works!</div>
+    <div></div>
   </main>
+
 </template>
 
 <script>
@@ -24,12 +25,12 @@ import ContactsContainer from './components/aside/AsideContainer.vue'
 
 <style scoped>
 aside {
-  width: 30%;
+  width: 400px;
   height: 100%;
 }
 
 main {
-  width: 70%;
+  width: calc(100% - 400px);
   height: 100%;
 }
 </style>
