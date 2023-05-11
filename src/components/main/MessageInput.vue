@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MessageInput"
+  name: "Input"
 }
 </script>
 

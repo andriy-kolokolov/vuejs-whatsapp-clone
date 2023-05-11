@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MessageInputContainer"
+  name: "InputContainer"
 }
 </script>
 

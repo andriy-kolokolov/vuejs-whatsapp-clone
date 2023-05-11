@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MainChatContainer"
+  name: "ChatContainer"
 }
 </script>
 
