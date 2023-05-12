@@ -16,6 +16,7 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
                 class="aside__contacts"
                 :filtered-contacts="getFilteredContacts()"
                 @search="getSearchTerm"
+                @contact-click="selectContact"
         />
     </aside>
 
@@ -33,6 +34,9 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 <script>
 export default {
     methods: {
+        selectContact(index){
+            this.selectedContact = index;
+        },
         getSearchTerm(searchTerm) {
             this.searchTerm = searchTerm;
         },

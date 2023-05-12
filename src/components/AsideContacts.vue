@@ -18,8 +18,11 @@
 
         <div class="contacts-wrapper">
             <div class="contacts-wrapper__contacts" :style="{ width: '100%' }">
-                <div class="contact" v-for="(contact, index) in filteredContacts"
+                <div
+                        class="contact"
+                        v-for="(contact, index) in filteredContacts"
                         :key="index"
+                        @click="updateSelectedContact(index)"
                 >
                     <div class="contact-content">
                         <div class="contact-content-left">
@@ -57,6 +60,9 @@ export default {
     methods: {
         updateContacts() {
             this.$emit('search', this.searchTerm);
+        },
+        updateSelectedContact(contactIndex) {
+            this.$emit('contact-click', contactIndex);
         },
         convertToISO(dateString) {
             const [datePart, timePart] = dateString.split(' ');
@@ -115,6 +121,12 @@ export default {
     /*background-color: crimson;*/
     height: var(--contact-height);
     display: flex;
+    cursor: pointer;
+    transition: var(--link-transition);
+}
+
+.contact:hover {
+    background-color: #b4d0e7;
 }
 
 .contact-content {
