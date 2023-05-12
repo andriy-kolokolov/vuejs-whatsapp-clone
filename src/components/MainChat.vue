@@ -6,11 +6,11 @@
                 <div v-for="(message, index) in contact.messages" :key="index" class="message">
                     <div v-if="message.status === 'sent'" class="message-sent">
                         <div class="message-txt">{{ message.message }}</div>
-                        <div class="message-date">{{ message.date }}</div>
+                        <div class="message-date">{{ getReadableDate(message.date) }}</div>
                     </div>
                     <div v-else class="message-received">
                         <div class="message-txt">{{ message.message }}</div>
-                        <div class="message-date">{{ message.date }}</div>
+                        <div class="message-date">{{ getReadableDate(message.date) }}</div>
                     </div>
                 </div>
             </div>
@@ -29,6 +29,16 @@ export default {
         contacts: {
             type: Array,
             required: true
+        }
+    },
+    methods: {
+        getReadableDate(dateString) {
+            const [datePart, timePart] = dateString.split(' ');
+            const [day, month, year] = datePart.split('/');
+            const [hours, minutes, seconds] = timePart.split(':');
+            const isoDate = new Date(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}`);
+            const options = {month: 'short', day: 'numeric', year: 'numeric'};
+            return isoDate.toLocaleDateString('en-US', options);
         }
     }
 }

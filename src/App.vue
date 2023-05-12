@@ -21,7 +21,10 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
     </aside>
 
     <main class="main">
-        <main-header class="main__header"/>
+        <main-header class="main__header"
+                :contacts="contacts"
+                :selected-contact="selectedContact"
+        />
         <main-chat
                 class="main__chat"
                 :contacts="contacts"
@@ -34,8 +37,8 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 <script>
 export default {
     methods: {
-        selectContact(index){
-            this.selectedContact = index;
+        selectContact(selectedContactIndex) {
+            this.selectedContact = selectedContactIndex;
         },
         getSearchTerm(searchTerm) {
             this.searchTerm = searchTerm;
