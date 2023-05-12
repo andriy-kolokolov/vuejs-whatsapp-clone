@@ -5,8 +5,8 @@
                 <i class="fa-regular fa-face-smile"></i>
             </div>
 
-            <div class="col msg-input-wrapper">
-                <div class="form-group">
+            <div class="col d-flex align-items-center msg-input-wrapper">
+                <div class="w-100 form-group">
                     <input type="text" class="form-control" id="input-msg" placeholder="Message...">
                 </div>
             </div>

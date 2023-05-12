@@ -11,18 +11,20 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 
 <template>
     <aside class="aside">
-        <aside-header class="aside__header"></aside-header>
+        <aside-header class="aside__header"/>
         <aside-contacts
                 class="aside__contacts"
-                :contacts="contacts"
                 :filtered-contacts="getFilteredContacts()"
                 @search="getSearchTerm"
-        ></aside-contacts>
+        />
     </aside>
 
     <main class="main">
         <main-header class="main__header"/>
-        <main-chat class="main__chat"/>
+        <main-chat
+                class="main__chat"
+                :contacts="contacts"
+        />
         <main-message-input class="main__message-input"/>
     </main>
 </template>

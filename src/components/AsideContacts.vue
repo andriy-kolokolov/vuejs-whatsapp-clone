@@ -46,14 +46,10 @@ export default {
     name: "AsideContacts",
     data() {
         return {
-            searchTerm: '',
+            searchTerm: ''
         }
     },
     props: {
-        contacts: {
-            type: Array,
-            required: true
-        },
         filteredContacts: {
             type: Array
         }
@@ -61,8 +57,7 @@ export default {
     methods: {
         updateContacts() {
             this.$emit('search', this.searchTerm);
-        }
-        ,
+        },
         convertToISO(dateString) {
             const [datePart, timePart] = dateString.split(' ');
             const [day, month, year] = datePart.split('/');
@@ -78,13 +73,6 @@ export default {
             if (timeDiff < 86400) return `${Math.floor(timeDiff / 3600)} hours ago`;
             return `${Math.floor(timeDiff / 86400)} days ago`;
         }
-    },
-    computed: {
-        // filteredContacts() {
-        //     return this.contacts.filter((contact) => {
-        //         return contact.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-        //     });
-        // }
     }
 }
 </script>
@@ -97,7 +85,8 @@ export default {
 }
 
 .contacts-wrapper {
-    margin-top: var(--search-contacts-height);
+    margin-top: 50px;
+;
 }
 
 .contacts__input-search {
