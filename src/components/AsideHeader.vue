@@ -13,7 +13,6 @@
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
         </div>
-
         <div class="notifications-wrapper">
             <div class="bell-wrapper">
                 <i class="fa-solid fa-bell-slash"></i>
@@ -23,7 +22,6 @@
                 <a href="#">Turn On notifications</a>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -52,8 +50,8 @@ export default {
     align-items: center;
 }
 
-.profile-wrapper__left .profile-name{
-    padding-left: 10px;
+.profile-wrapper__left .profile-name {
+    margin-left: 20px;
     font-weight: bold;
 }
 
@@ -78,7 +76,7 @@ export default {
     background-color: #8edafc;
 }
 
-.notifications-wrapper .txt{
+.notifications-wrapper .txt {
     padding-left: 10px;
 }
 

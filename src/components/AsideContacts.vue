@@ -31,7 +31,9 @@
                             </div>
                             <div class="contact-content__wrap-name-msg">
                                 <div class="contact-content__name">{{ contact.name }}</div>
-                                <div class="contact-content__message">{{ contact.messages[0].message }}</div>
+                                <div class="contact-content__message">
+                                    {{ contact.messages[contact.messages.length - 1].message }}
+                                </div>
                             </div>
                         </div>
                         <div class="contact-content-right">
@@ -91,8 +93,7 @@ export default {
 }
 
 .contacts-wrapper {
-    margin-top: 50px;
-;
+    margin-top: 50px;;
 }
 
 .contacts__input-search {
@@ -118,11 +119,11 @@ export default {
 }
 
 .contact {
-    /*background-color: crimson;*/
     height: var(--contact-height);
     display: flex;
     cursor: pointer;
     transition: var(--link-transition);
+    padding: 10px;
 }
 
 .contact:hover {
@@ -136,18 +137,19 @@ export default {
 
 .contact-content-left {
     display: flex;
-    flex-basis: 80%;
+    flex-basis: 70%;
 }
 
 .contact-content-right {
-    flex-basis: 20%;
+    flex-basis: 30%;
     display: flex;
-    align-items: center;
+    align-items: start;
+    justify-content: end;
+    margin-top: 5px;
 }
 
 .contact--content__avatar-wrapper {
     height: 100%;
-    padding: 5px;
 }
 
 .contact--content__avatar-wrapper img {
@@ -158,21 +160,22 @@ export default {
 .contact-content__wrap-name-msg {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-inline: var(--elements-padding);
+    justify-content: start;
+    padding-left: var(--elements-padding);
 }
 
 .contact-content__name {
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .contact-content__message {
-    font-size: .8rem;
+    font-size: .85rem;
     opacity: .7;
 }
 
 .contact-content__date {
     font-size: .7rem;
+    opacity: .8;
 }
 
 </style>

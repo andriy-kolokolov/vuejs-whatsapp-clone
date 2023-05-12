@@ -20,8 +20,9 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
         />
     </aside>
 
-    <main class="main">
-        <main-header class="main__header"
+    <main class="main" >
+        <main-header
+                class="main__header"
                 :contacts="contacts"
                 :selected-contact="selectedContact"
         />
@@ -51,7 +52,7 @@ export default {
     },
     data() {
         return {
-            selectedContact: 7,
+            selectedContact: 0,
             searchTerm: '',
             contacts: [
                 {
@@ -72,6 +73,16 @@ export default {
                         {
                             date: '10/01/2020 16:15:22',
                             message: 'Tutto fatto!',
+                            status: 'received'
+                        },
+                        {
+                            date: '11/01/2020 16:15:22',
+                            message: 'Sicuro?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '12/01/2020 16:15:22',
+                            message: 'Fidati !!',
                             status: 'received'
                         }
                     ],
@@ -204,12 +215,12 @@ export default {
                             status: 'received'
                         },
                         {
-                            date: '10/01/2020 15:50:00',
+                            date: '11/01/2020 15:50:00',
                             message: 'No, l\'ho già mangiata ieri, ordiniamo sushi!',
                             status: 'sent'
                         },
                         {
-                            date: '10/01/2020 15:51:00',
+                            date: '12/01/2020 15:51:00',
                             message: 'OK!!',
                             status: 'received'
                         }

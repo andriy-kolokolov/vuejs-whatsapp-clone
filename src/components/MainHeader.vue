@@ -7,7 +7,7 @@
                 </div>
                 <div class="profile-info">
                     <div class="profile-name">{{ getName() }}</div>
-                    <div class="profile-last-access">last seen {{ getMsgTime() }}</div>
+                    <div class="profile-last-access">last seen {{ getLastMsgTime() }}</div>
                 </div>
             </div>
 
@@ -40,10 +40,10 @@ export default {
         getAvatar() {
             return this.contacts[this.selectedContact].avatar;
         },
-        getMsgTime() {
+        getLastMsgTime() {
             const messages = this.contacts[this.selectedContact].messages;
             //find last received message and return its date
-            for (let i = 0; i < messages.length; i++) {
+            for (let i = messages.length - 1; i > 0; i--) {
                 if (messages[i].status === 'received') {
                     return this.getReadableDate(messages[i].date)
                 }
@@ -82,6 +82,14 @@ export default {
     display: flex;
     align-items: center;
     margin-right: 10px;
+}
+
+.profile-info {
+    margin-left: 20px;
+}
+
+.profile-name {
+    font-weight: bold;
 }
 
 .profile-wrapper__right i {
