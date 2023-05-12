@@ -27,8 +27,8 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 .aside {
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: var(--aside-width);
+    height: 100%;
 }
 
 .aside__header {
@@ -44,8 +44,8 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 .main {
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: auto; /* allow the main container to adapt to its content */
-    margin-left: var(--aside-width);
 }
 
 .main__header {

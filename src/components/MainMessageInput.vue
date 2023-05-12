@@ -1,5 +1,7 @@
 <template>
+    <div class="message-input-container">
 
+    </div>
 </template>
 
 <script>
@@ -9,5 +11,8 @@ export default {
 </script>
 
 <style scoped>
-
+    .message-input-container {
+        height: var(--profile-wrapper-height);
+        background-color: crimson;
+    }
 </style>

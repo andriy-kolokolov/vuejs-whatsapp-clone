@@ -3,7 +3,8 @@
         <div class="profile-wrapper">
             <div class="profile-wrapper__left">
                 <div class="avatar-wrapper">
-                    <img src="../assets/img/avatar_io.jpg" alt=""/></div>
+                    <img src="../assets/img/avatar_io.jpg" alt=""/>
+                </div>
                 <div class="profile-name">Sofia</div>
             </div>
             <div class="profile-wrapper__right">
@@ -35,14 +36,14 @@ export default {
 <style scoped>
 .aside-header-container {
     width: var(--aside-width);
-    /*height: var(--aside-header-height);*/
-    background-color: white;
+    background-color: var(--c-bg-white);
 }
 
 .profile-wrapper {
+    height: var(--profile-wrapper-height);
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: var(--padding-header);
 }
 
 .profile-wrapper__left {
@@ -64,7 +65,7 @@ export default {
 .profile-wrapper__right i {
     font-size: 1.3rem;
     margin-inline: 8px;
-    color: var(--c-ico-white);
+    color: var(--c-ico-light-grey);
 }
 
 .avatar-wrapper img {
@@ -90,7 +91,7 @@ export default {
 .bell-wrapper {
     padding: 1rem;
     font-size: 1rem;
-    background-color: white;
+    background-color: var(--c-bg-white);
     border-radius: 50%;
 }
 

@@ -2,11 +2,13 @@
     --c-bg-body-top: #009587;
     --c-bg-body-bot: #dad9cf;
     --c-bg-white: white;
-    --c-ico-white: #b0b0b0;
+    --c-ico-light-grey: #b0b0b0;
     --aside-width: 400px;
     /*--main-width: calc(100% - var(--aside-width));*/
     --search-contacts-height: 30px;
     --elements-padding: 10px;
+    --profile-wrapper-height: 80px;
+    --padding-header: 10px;
 }
 
 body {
@@ -19,6 +21,7 @@ body {
 #app {
     height: 80vh;
     width: 80vw;
+    display: flex;
 }
 
 
