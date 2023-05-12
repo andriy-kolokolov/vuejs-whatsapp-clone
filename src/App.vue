@@ -16,21 +16,21 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
                 class="aside__contacts"
                 :contacts="contacts"
                 :filtered-contacts="getFilteredContacts()"
-                @input-search="updateContacts"
+                @search="getSearchTerm"
         ></aside-contacts>
     </aside>
 
     <main class="main">
-        <main-header class="main__header"></main-header>
-        <main-chat class="main__chat"></main-chat>
-        <main-message-input class="main__message-input"></main-message-input>
+        <main-header class="main__header"/>
+        <main-chat class="main__chat"/>
+        <main-message-input class="main__message-input"/>
     </main>
 </template>
 
 <script>
 export default {
     methods: {
-        updateContacts(searchTerm) {
+        getSearchTerm(searchTerm) {
             this.searchTerm = searchTerm;
         },
         getFilteredContacts() {

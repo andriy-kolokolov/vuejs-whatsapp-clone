@@ -60,7 +60,7 @@ export default {
     },
     methods: {
         updateContacts() {
-            this.$emit('input-search', this.searchTerm);
+            this.$emit('search', this.searchTerm);
         }
         ,
         convertToISO(dateString) {
