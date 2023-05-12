@@ -430,7 +430,7 @@ export default {
 }
 
 .input-label-icon {
-    color: var(--c-ico-light-grey);
+    color: var(--ico-c-light-grey);
     height: 100%;
 }
 

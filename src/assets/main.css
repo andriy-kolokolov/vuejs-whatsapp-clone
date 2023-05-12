@@ -2,13 +2,16 @@
     --c-bg-body-top: #009587;
     --c-bg-body-bot: #dad9cf;
     --c-bg-white: white;
-    --c-ico-light-grey: #b0b0b0;
+    --ico-c-light-grey: #b0b0b0;
     --aside-width: 400px;
-    /*--main-width: calc(100% - var(--aside-width));*/
     --search-contacts-height: 30px;
     --elements-padding: 10px;
     --profile-wrapper-height: 80px;
     --padding-header: 10px;
+    --ico-size: 1.4rem;
+
+    --link-transition: .3s;
+    --link-opacity: .6;
 }
 
 body {
@@ -24,4 +27,12 @@ body {
     display: flex;
 }
 
+i {
+    cursor: pointer;
+    opacity: var(--link-opacity);
+    transition: var(--link-transition);
+}
 
+i:hover {
+    opacity: .9;
+}

@@ -50,6 +50,10 @@ export default {
         margin-right: 10px;
     }
 
+    .profile-wrapper__right i {
+        font-size: var(--ico-size);
+    }
+
     .avatar-wrapper {
         height: 100%;
     }

@@ -63,9 +63,8 @@ export default {
 }
 
 .profile-wrapper__right i {
-    font-size: 1.3rem;
+    font-size: var(--ico-size);
     margin-inline: 8px;
-    color: var(--c-ico-light-grey);
 }
 
 .avatar-wrapper img {
