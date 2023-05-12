@@ -1,10 +1,24 @@
-@import './base.css';
+:root {
+    --c-bg-body-top: #009587;
+    --c-bg-body-bot: #dad9cf;
+    --c-bg-white: white;
+    --c-ico-white: #b0b0b0;
+    --aside-width: 400px;
+    /*--main-width: calc(100% - var(--aside-width));*/
+    --search-contacts-height: 30px;
+    --elements-padding: 10px;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(to top, var(--c-bg-body-bot) 80%, var(--c-bg-body-top) 20%);
+}
 
 #app {
-    width: 80vw;
     height: 80vh;
-    display: flex;
-    align-items: center;
+    width: 80vw;
 }
 
 

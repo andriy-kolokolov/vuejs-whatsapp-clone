@@ -1,11 +1,21 @@
-<script setup>
-
-</script>
-
 <template>
     <div class="contacts-container">
+        <div class="contacts__input-search input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-label-icon input-group-text" id="search-contact">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+            </div>
+            <input type="text"
+                    class="form-control"
+                    placeholder="Search contact..."
+                    aria-label="Search"
+                    aria-describedby="search-contact"
+                    v-model="searchTerm"
+            >
+        </div>
+
         <div class="contacts-wrapper">
-            <input class="contacts-wrapper__input-search" type="text" v-model="searchTerm"/>
             <div class="contacts-wrapper__contacts" :style="{ width: '100%' }">
                 <div class="contact" v-for="(contact, index) in filteredContacts"
                         :key="index"
@@ -28,7 +38,6 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -393,28 +402,36 @@ export default {
 
 <style scoped>
 .contacts-container {
-    --search-height: 30px;
     --contact-height: 80px;
-    --elements-padding: 10px;
 
-
-    width: var(--aside-width);
-    height: var(--aside-contacts-height);
-    background-color: white;
+    background-color: var(--c-bg-white);
 }
 
 .contacts-wrapper {
+    margin-top: var(--search-contacts-height);
+}
+
+.contacts__input-search {
+    position: fixed;
+    width: var(--aside-width);
+    z-index: 99;
+    background-color: var(--c-bg-white);
+}
+
+.contacts__input-search .input-group-text{
+    background-color: white;
+    border: 0;
+}
+
+.contacts__input-search .form-control,
+.contacts__input-search .form-control:focus{
+    border: 0;
+    box-shadow: none;
+}
+
+.input-label-icon {
+    color: var(--c-ico-white);
     height: 100%;
-}
-
-.contacts-wrapper__input-search {
-    height: var(--search-height);
-    width: 100%;
-}
-
-.contacts-wrapper__contacts {
-    height: calc(100% - var(--search-height));
-    overflow-y: auto;
 }
 
 .contact {

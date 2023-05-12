@@ -1,40 +1,64 @@
 <script setup>
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import AsideHeader from "@/components/aside/AsideHeader.vue";
-import AsideContacts from "@/components/aside/AsideContacts.vue";
+
+import AsideHeader from "@/components/AsideHeader.vue";
+import AsideContacts from "@/components/AsideContacts.vue";
+import MainHeader from "@/components/MainHeader.vue";
+import MainChat from "@/components/MainChat.vue";
+import MainMessageInput from "@/components/MainMessageInput.vue";
 </script>
 
 <template>
-
-    <aside>
-        <aside-header/>
-        <aside-contacts/>
+    <aside class="aside">
+        <aside-header class="aside__header"></aside-header>
+        <aside-contacts class="aside__contacts"></aside-contacts>
     </aside>
 
-    <main>
-        <div></div>
+    <main class="main">
+        <main-header class="main__header"></main-header>
+        <main-chat class="main__chat"></main-chat>
+        <main-message-input class="main__message-input"></main-message-input>
     </main>
-
 </template>
-
-<script>
-
-</script>
 
 <style>
 
-aside {
-    --aside-width: 400px;
-    --aside-header-height: 10%;
-    --aside-contacts-height: 70%;
-
-    width: 400px;
+.aside {
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    width: var(--aside-width);
 }
 
-main {
-    width: calc(100% - 400px);
-    height: 100%;
+.aside__header {
+    flex: 0 0 auto;
+    overflow: auto;
+}
+
+.aside__contacts {
+    flex: 1 1 auto;
+    overflow: auto;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    height: auto; /* allow the main container to adapt to its content */
+    margin-left: var(--aside-width);
+}
+
+.main__header {
+    flex: 0 0 auto;
+}
+
+.main__chat {
+    flex: 1 1 auto;
+    overflow-y: auto; /* add a scrollbar to the message container */
+    max-height: calc(100% - 60px); /* set the maximum height to the available space minus the heights of the header and message input */
+}
+
+.main__message-input {
+    flex: 0 0 auto;
 }
 </style>

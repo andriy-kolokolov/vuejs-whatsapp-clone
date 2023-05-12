@@ -3,8 +3,7 @@
         <div class="profile-wrapper">
             <div class="profile-wrapper__left">
                 <div class="avatar-wrapper">
-                    <img src="../../assets/img/avatar_io.jpg" alt="profile avatar"/>
-                </div>
+                    <img src="../assets/img/avatar_io.jpg" alt=""/></div>
                 <div class="profile-name">Sofia</div>
             </div>
             <div class="profile-wrapper__right">
@@ -63,8 +62,9 @@ export default {
 }
 
 .profile-wrapper__right i {
-    font-size: 1.5rem;
-    margin-inline: 5px;
+    font-size: 1.3rem;
+    margin-inline: 8px;
+    color: var(--c-ico-white);
 }
 
 .avatar-wrapper img {

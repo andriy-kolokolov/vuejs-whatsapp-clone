@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "InputContainer"
+    name: "MainHeader"
 }
 </script>
 
