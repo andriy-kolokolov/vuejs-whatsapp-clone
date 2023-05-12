@@ -24,6 +24,7 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
         <main-chat
                 class="main__chat"
                 :contacts="contacts"
+                :selected-contact="selectedContact"
         />
         <main-message-input class="main__message-input"/>
     </main>
@@ -43,6 +44,7 @@ export default {
     },
     data() {
         return {
+            selectedContact: 7,
             searchTerm: '',
             contacts: [
                 {
