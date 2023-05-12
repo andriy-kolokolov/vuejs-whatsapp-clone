@@ -2,7 +2,6 @@
     --c-bg-body-top: #009587;
     --c-bg-body-bot: #dad9cf;
     --c-bg-white: white;
-    --ico-c-light-grey: #b0b0b0;
     --aside-width: 400px;
     --search-contacts-height: 30px;
     --elements-padding: 10px;
@@ -31,8 +30,14 @@ i {
     cursor: pointer;
     opacity: var(--link-opacity);
     transition: var(--link-transition);
+    padding: 10px;
 }
 
 i:hover {
     opacity: .9;
+}
+
+.input-label-icon i {
+    opacity: 1;
+    cursor: default;
 }

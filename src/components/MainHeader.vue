@@ -46,7 +46,6 @@ export default {
     .profile-wrapper__right {
         display: flex;
         align-items: center;
-        gap: 1rem;
         margin-right: 10px;
     }
 

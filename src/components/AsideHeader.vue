@@ -64,7 +64,6 @@ export default {
 
 .profile-wrapper__right i {
     font-size: var(--ico-size);
-    margin-inline: 8px;
 }
 
 .avatar-wrapper img {
@@ -88,8 +87,8 @@ export default {
 }
 
 .bell-wrapper {
-    padding: 1rem;
-    font-size: 1rem;
+    padding: .5rem;
+    font-size: var(--ico-size);
     background-color: var(--c-bg-white);
     border-radius: 50%;
 }
