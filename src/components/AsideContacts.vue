@@ -57,14 +57,14 @@ export default {
     data() {
         return {
             searchTerm: '',
-            selectedIndex: this.selectedContact
+            selectedIndex: this.idSelectedContact
         }
     },
     props: {
         contacts: {
             type: Array
         },
-        selectedContact: {
+        idSelectedContact: {
             type: Number,
             required: true
         },
@@ -185,6 +185,7 @@ export default {
     flex-direction: column;
     justify-content: start;
     padding-left: var(--elements-padding);
+    overflow: hidden;
 }
 
 .contact-content__name {

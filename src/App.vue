@@ -20,7 +20,7 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
                 class="aside__contacts"
                 :contacts="getFilteredContacts()"
                 :is-contact-selected="isContactSelected"
-                :selected-contact="selectedContact"
+                :id-selected-contact="selectedContact"
                 @search="manageSearchInput"
                 @contact-click="selectContact"
         />
@@ -31,19 +31,27 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
                 class="main__header"
                 :contacts="getFilteredContacts()"
                 :is-contact-selected="isContactSelected"
-                :selected-contact="selectedContact"
+                :id-selected-contact="selectedContact"
         />
         <main-chat
                 class="main__chat"
                 :contacts="getFilteredContacts()"
                 :is-contact-selected="isContactSelected"
-                :selected-contact="selectedContact"
+                :id-selected-contact="selectedContact"
         />
-        <main-message-input class="main__message-input"/>
+        <main-message-input
+                class="main__message-input"
+                :contacts="getFilteredContacts()"
+                :is-contact-selected="isContactSelected"
+                :id-selected-contact="selectedContact"
+                @send-message="addMessage"
+        />
     </main>
 </template>
 
 <script>
+import {DateTime} from "luxon";
+
 export default {
     methods: {
         selectContact(selectedContactIndex) {
@@ -58,6 +66,18 @@ export default {
             return this.contacts.filter((contact) => {
                 return contact.name.toLowerCase().includes(this.searchTerm.toLowerCase());
             });
+        },
+        addMessage(message) {
+            this.contacts[this.selectedContact].messages.push(
+                    {
+                        date: this.getCurrentDateTime(),
+                        message: message,
+                        status: 'sent'
+                    }
+            );
+        },
+        getCurrentDateTime() {
+            return DateTime.local().toFormat('dd/MM/yyyy HH:mm:ss');
         }
     },
     data() {

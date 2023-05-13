@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import {DateTime} from "luxon";
+
 export default {
     name: "MainHeader",
     props: {
@@ -32,7 +34,7 @@ export default {
             type: Boolean,
             required: true
         },
-        selectedContact: {
+        idSelectedContact: {
             type: Number,
             required: true
         },
@@ -43,13 +45,13 @@ export default {
     },
     methods: {
         getName() {
-            return this.contacts[this.selectedContact].name;
+            return this.contacts[this.idSelectedContact].name;
         },
         getAvatar() {
-            return this.contacts[this.selectedContact].avatar;
+            return this.contacts[this.idSelectedContact].avatar;
         },
         getLastMsgTime() {
-            const messages = this.contacts[this.selectedContact].messages;
+            const messages = this.contacts[this.idSelectedContact].messages;
             //find last received message and return its date
             for (let i = messages.length - 1; i > 0; i--) {
                 if (messages[i].status === 'received') {
@@ -58,12 +60,8 @@ export default {
             }
         },
         getReadableDate(dateString) {
-            const [datePart, timePart] = dateString.split(' ');
-            const [day, month, year] = datePart.split('/');
-            const [hours, minutes, seconds] = timePart.split(':');
-            const isoDate = new Date(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}`);
-            const options = {month: 'short', day: 'numeric', year: 'numeric'};
-            return isoDate.toLocaleDateString('en-US', options);
+            const isoDate = DateTime.fromFormat(dateString, 'dd/MM/yyyy HH:mm:ss');
+            return isoDate.toFormat('dd/MM/yyyy HH:mm:ss');
         },
     }
 }

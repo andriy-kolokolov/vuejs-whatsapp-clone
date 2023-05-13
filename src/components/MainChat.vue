@@ -1,10 +1,10 @@
 <template>
     <div class="chat-container">
         <div class="messages-container" v-for="(contact, index) in contacts" :key="index" v-if="isContactSelected">
-            <div class="first-message-date" v-if="index === selectedContact">
+            <div class="first-message-date" v-if="index === idSelectedContact">
                 {{ getFirstMsgDate() }}
             </div>
-            <div v-if="index === selectedContact">
+            <div v-if="index === idSelectedContact">
                 <div v-for="(message, index) in contact.messages" :key="index" class="message-wrap">
                     <div v-if="message.status === 'sent'" class="message sent">
                         <div class="message-txt">{{ message.message }}</div>
@@ -27,7 +27,7 @@
 export default {
     name: "MainChat",
     props: {
-        selectedContact: {
+        idSelectedContact: {
             type: Number,
             required: true
         },
@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         getFirstMsgDate() {
-            const messages = this.contacts[this.selectedContact].messages;
+            const messages = this.contacts[this.idSelectedContact].messages;
             return this.getReadableDate(messages[0].date);
         },
         getReadableDate(dateString) {
@@ -90,6 +90,11 @@ export default {
 .message {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.message-txt {
+    flex: 1 1 60%;
 }
 
 .message-date {
@@ -97,7 +102,7 @@ export default {
     display: flex;
     align-items: end;
     justify-content: end;
-    flex-basis: 40%;
+    flex: 1 1 40%;
 }
 
 .message.received {
