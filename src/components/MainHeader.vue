@@ -18,9 +18,9 @@
             </div>
         </div>
 
-        <div v-else>
-            <h1>select contact to start chat</h1>
-        </div>
+<!--        <div v-else>-->
+<!--            <h1>select contact to start chat</h1>-->
+<!--        </div>-->
     </div>
 </template>
 

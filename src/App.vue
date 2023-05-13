@@ -13,13 +13,12 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
     <!--
         TODO
             -Move search contact input in <AsideHeader> component to fix scrollbar in <AsideContacts> issue
-            -After searching for contacts and selecting a contact, the wrong contact's chat is being rendered
     -->
     <aside class="aside">
         <aside-header class="aside__header"/>
         <aside-contacts
                 class="aside__contacts"
-                :filtered-contacts="getFilteredContacts()"
+                :contacts="getFilteredContacts()"
                 :is-contact-selected="isContactSelected"
                 :selected-contact="selectedContact"
                 @search="manageSearchInput"
@@ -50,12 +49,10 @@ export default {
         selectContact(selectedContactIndex) {
             this.isContactSelected = true;
             this.selectedContact = selectedContactIndex;
-
         },
         manageSearchInput(searchTerm) {
             this.isContactSelected = false;
             this.searchTerm = searchTerm;
-            this.isContactSelected = false;
         },
         getFilteredContacts() {
             return this.contacts.filter((contact) => {
@@ -65,7 +62,7 @@ export default {
     },
     data() {
         return {
-            isContactSelected: false,
+            isContactSelected: true,
             selectedContact: 0,
             searchTerm: '',
             contacts: [

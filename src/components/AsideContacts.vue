@@ -17,10 +17,10 @@
         </div>
 
         <div class="contacts-wrapper">
-            <div class="contacts-wrapper__contacts" :style="{ width: '100%' }">
+            <div v-if="contacts.length > 0" class="contacts-wrapper__contacts" :style="{ width: '100%' }">
                 <div
                         class="contact"
-                        v-for="(contact, index) in filteredContacts"
+                        v-for="(contact, index) in contacts"
                         :key="index"
                         :class="{ selected: isSelected(index), unselected: !isSelected(index) }"
                         @click="updateSelectedContact(index)"
@@ -43,6 +43,10 @@
                     </div>
                 </div>
             </div>
+
+            <div v-else class="no-contacts-found">
+                <p class="no-contacts-found__txt">Contact "{{ this.searchTerm }}" not found...</p>
+            </div>
         </div>
     </div>
 </template>
@@ -53,11 +57,11 @@ export default {
     data() {
         return {
             searchTerm: '',
-            selectedIndex: 0
+            selectedIndex: this.selectedContact
         }
     },
     props: {
-        filteredContacts: {
+        contacts: {
             type: Array
         },
         selectedContact: {
@@ -196,5 +200,12 @@ export default {
     font-size: .7rem;
     opacity: .8;
 }
+
+.no-contacts-found {
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
 
 </style>

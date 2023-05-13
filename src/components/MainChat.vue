@@ -17,9 +17,8 @@
                 </div>
             </div>
         </div>
-
-        <div v-else>
-            <h1>select contact to start chat</h1>
+        <div class="no-selected-contact" v-else>
+            <p class="no-selected-contact__txt">Select contact to start chat...</p>
         </div>
     </div>
 </template>
@@ -43,10 +42,8 @@ export default {
     },
     methods: {
         getFirstMsgDate() {
-            if (this.contacts.length !== 0) {
-                const messages = this.contacts[this.selectedContact].messages;
-                return this.getReadableDate(messages[0].date);
-            }
+            const messages = this.contacts[this.selectedContact].messages;
+            return this.getReadableDate(messages[0].date);
         },
         getReadableDate(dateString) {
             const [datePart, timePart] = dateString.split(' ');
@@ -64,7 +61,6 @@ export default {
 .chat-container {
     background-image: url("@/assets/img/mine.jpg");
     background-position: center;
-    /*padding: 20px 30px 0 30px;*/
 }
 
 .messages-container {
@@ -111,6 +107,22 @@ export default {
 .message.sent {
     background-color: #d3f7b9;
     margin-left: auto;
+}
+
+.no-selected-contact {
+    cursor: default;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.no-selected-contact__txt {
+    background-color: rgba(180, 208, 231, 0.6);
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
 
