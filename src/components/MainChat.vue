@@ -1,6 +1,6 @@
 <template>
     <div class="chat-container">
-        <div class="messages-container" v-for="(contact, index) in contacts" :key="index">
+        <div class="messages-container" v-for="(contact, index) in contacts" :key="index" >
             <div class="first-message-date" v-if="index === selectedContact">
                 {{ getFirstMsgDate() }}
             </div>
@@ -28,6 +28,10 @@ export default {
             type: Number,
             required: true
         },
+        isContactSelected: {
+            type: Boolean,
+            required: true
+        },
         contacts: {
             type: Array,
             required: true
@@ -35,8 +39,10 @@ export default {
     },
     methods: {
         getFirstMsgDate() {
-            const messages = this.contacts[this.selectedContact].messages;
-            return this.getReadableDate(messages[0].date);
+            if (this.contacts.length !== 0) {
+                const messages = this.contacts[this.selectedContact].messages;
+                return this.getReadableDate(messages[0].date);
+            }
         },
         getReadableDate(dateString) {
             const [datePart, timePart] = dateString.split(' ');

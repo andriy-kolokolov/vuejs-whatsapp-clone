@@ -63,6 +63,10 @@ export default {
         selectedContact: {
             type: Number,
             required: true
+        },
+        isContactSelected: {
+            type: Boolean,
+            required: true
         }
     },
     methods: {
@@ -89,7 +93,9 @@ export default {
             return `${Math.floor(timeDiff / 86400)} days ago`;
         },
         isSelected(index) {
-            return index === this.selectedIndex;
+            if (this.isContactSelected) {
+                return index === this.selectedIndex;
+            }
         }
     }
 }

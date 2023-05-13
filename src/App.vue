@@ -20,21 +20,24 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
         <aside-contacts
                 class="aside__contacts"
                 :filtered-contacts="getFilteredContacts()"
+                :is-contact-selected="isContactSelected"
                 :selected-contact="selectedContact"
-                @search="getSearchTerm"
+                @search="manageSearchInput"
                 @contact-click="selectContact"
         />
     </aside>
 
-    <main class="main" >
+    <main class="main">
         <main-header
                 class="main__header"
-                :contacts="contacts"
+                :contacts="getFilteredContacts()"
+                :is-contact-selected="isContactSelected"
                 :selected-contact="selectedContact"
         />
         <main-chat
                 class="main__chat"
-                :contacts="contacts"
+                :contacts="getFilteredContacts()"
+                :is-contact-selected="isContactSelected"
                 :selected-contact="selectedContact"
         />
         <main-message-input class="main__message-input"/>
@@ -45,10 +48,14 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 export default {
     methods: {
         selectContact(selectedContactIndex) {
+            this.isContactSelected = true;
             this.selectedContact = selectedContactIndex;
+
         },
-        getSearchTerm(searchTerm) {
+        manageSearchInput(searchTerm) {
+            this.isContactSelected = false;
             this.searchTerm = searchTerm;
+            this.isContactSelected = false;
         },
         getFilteredContacts() {
             return this.contacts.filter((contact) => {
@@ -58,6 +65,7 @@ export default {
     },
     data() {
         return {
+            isContactSelected: false,
             selectedContact: 0,
             searchTerm: '',
             contacts: [

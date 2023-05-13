@@ -24,6 +24,10 @@
 export default {
     name: "MainHeader",
     props: {
+        isContactSelected: {
+            type: Boolean,
+            required: true
+        },
         selectedContact: {
             type: Number,
             required: true
@@ -35,17 +39,23 @@ export default {
     },
     methods: {
         getName() {
-            return this.contacts[this.selectedContact].name;
+            if (this.contacts.length > 0) {
+                return this.contacts[this.selectedContact].name;
+            }
         },
         getAvatar() {
-            return this.contacts[this.selectedContact].avatar;
+            if (this.contacts.length > 0) {
+                return this.contacts[this.selectedContact].avatar;
+            }
         },
         getLastMsgTime() {
-            const messages = this.contacts[this.selectedContact].messages;
-            //find last received message and return its date
-            for (let i = messages.length - 1; i > 0; i--) {
-                if (messages[i].status === 'received') {
-                    return this.getReadableDate(messages[i].date)
+            if (this.contacts.length > 0) {
+                const messages = this.contacts[this.selectedContact].messages;
+                //find last received message and return its date
+                for (let i = messages.length - 1; i > 0; i--) {
+                    if (messages[i].status === 'received') {
+                        return this.getReadableDate(messages[i].date)
+                    }
                 }
             }
         },
