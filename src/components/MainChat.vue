@@ -7,17 +7,17 @@
             <div v-if="index === idSelectedContact">
                 <div v-for="(message, index) in contact.messages" :key="index" class="message-wrap">
                     <div v-if="message.status === 'sent'" class="message sent">
-                        <div class="message-txt">{{ message.message }}</div>
-                        <div class="message-date">{{ getReadableDate(message.date) }}</div>
+                        <div class="message__txt">{{ message.message }}</div>
+                        <div class="message__date">{{ getReadableDate(message.date) }}</div>
                     </div>
                     <div v-else class="message received">
-                        <div class="message-txt">{{ message.message }}</div>
-                        <div class="message-date">{{ getReadableDate(message.date) }}</div>
+                        <div class="message__txt">{{ message.message }}</div>
+                        <div class="message__date">{{ getReadableDate(message.date) }}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="no-selected-contact" v-else>
+        <div v-else class="no-selected-contact">
             <p class="no-selected-contact__txt">Select contact to start chat...</p>
         </div>
     </div>
@@ -82,9 +82,9 @@ export default {
 .message {
     display: flex;
     max-width: 300px;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .message {
@@ -93,16 +93,18 @@ export default {
     flex-wrap: wrap;
 }
 
-.message-txt {
-    flex: 1 1 60%;
+.message__txt {
+    flex: 1 1 70%;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
-.message-date {
+.message__date {
     font-size: .75rem;
     display: flex;
     align-items: end;
     justify-content: end;
-    flex: 1 1 40%;
+    flex: 1 1 30%;
 }
 
 .message.received {

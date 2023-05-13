@@ -61,7 +61,7 @@ export default {
         },
         getReadableDate(dateString) {
             const isoDate = DateTime.fromFormat(dateString, 'dd/MM/yyyy HH:mm:ss');
-            return isoDate.toFormat('dd/MM/yyyy HH:mm:ss');
+            return isoDate.toFormat('dd/MM/yyyy HH:mm');
         },
     }
 }

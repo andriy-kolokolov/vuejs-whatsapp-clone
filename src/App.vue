@@ -12,7 +12,8 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 <template>
     <!--
         TODO
-            -Move search contact input in <AsideHeader> component to fix scrollbar in <AsideContacts> issue
+            - after send message change status of chat interlocutor:
+            "delay -> online -> typing -> answer received -> update last seen date"
     -->
     <aside class="aside">
         <aside-header class="aside__header"/>
@@ -38,6 +39,7 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
                 :contacts="getFilteredContacts()"
                 :is-contact-selected="isContactSelected"
                 :id-selected-contact="selectedContact"
+
         />
         <main-message-input
                 class="main__message-input"
@@ -51,10 +53,12 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 
 <script>
 import {DateTime} from "luxon";
+import ReplyMessageGenerator from './util/ReplyMessageGenerator'
 
 export default {
     methods: {
         selectContact(selectedContactIndex) {
+            // to change bg color of selected contact
             this.isContactSelected = true;
             this.selectedContact = selectedContactIndex;
         },
@@ -63,16 +67,30 @@ export default {
             this.searchTerm = searchTerm;
         },
         getFilteredContacts() {
+            // refresh contacts when typing in search input
             return this.contacts.filter((contact) => {
                 return contact.name.toLowerCase().includes(this.searchTerm.toLowerCase());
             });
         },
         addMessage(message) {
-            this.contacts[this.selectedContact].messages.push(
+            // temporary store contact ID to prevent sending message in wrong chat
+            this.tempSelectedContact = this.selectedContact
+            this.contacts[this.tempSelectedContact].messages.push(
                     {
                         date: this.getCurrentDateTime(),
                         message: message,
                         status: 'sent'
+                    }
+            );
+            setTimeout(this.requestReply, 1000);
+        },
+        requestReply() {
+            const replyMsgGenerator = new ReplyMessageGenerator(this.userName, this.language)
+            this.contacts[this.tempSelectedContact].messages.push(
+                    {
+                        date: this.getCurrentDateTime(),
+                        message: replyMsgGenerator.getJoke(),
+                        status: 'received'
                     }
             );
         },
@@ -82,9 +100,12 @@ export default {
     },
     data() {
         return {
-            isContactSelected: true,
+            userName: 'Sofia',
+            language: 'it',
+            isContactSelected: false,
             selectedContact: 0,
             searchTerm: '',
+            tempSelectedContact: 0,  // temporary store contact ID to prevent sending message in wrong chat
             contacts: [
                 {
                     name: 'Michele',

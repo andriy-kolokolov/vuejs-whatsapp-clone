@@ -12,7 +12,7 @@
                             class="form-control"
                             id="input-msg"
                             placeholder="Message..."
-                            v-model="message"
+                            v-model="userMessage"
                             @keyup.enter="sendMessage"
                     >
                 </div>
@@ -30,7 +30,7 @@ export default {
     name: "MainMessageInput",
     data() {
         return {
-            message: ''
+            userMessage: ''
         }
     },
     props: {
@@ -48,9 +48,13 @@ export default {
     },
     methods: {
         sendMessage() {
-            this.$emit('send-message', this.message);
-            this.message = '';
-            console.log("sent to app component")
+            if (this.isContactSelected) {
+                this.$emit('send-message', this.userMessage);
+                this.userMessage = '';
+            } else {
+                console.log('no chat selected')
+                // TODO SHOW POPUP "SELECT CONTACT"
+            }
         }
     }
 }

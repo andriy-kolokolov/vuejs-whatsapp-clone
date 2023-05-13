@@ -38,7 +38,9 @@
                             </div>
                         </div>
                         <div class="contact-content-right">
-                            <div class="contact-content__date">{{ getTimePassed(contact.messages[0].date) }}</div>
+                            <div class="contact-content__date">
+                                {{ getTimePassed(contact.messages[contact.messages.length - 1].date) }}
+                            </div>
                         </div>
                     </div>
                 </div>
