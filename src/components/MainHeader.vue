@@ -1,6 +1,6 @@
 <template>
     <div class="header-container">
-        <div class="profile-wrapper">
+        <div v-if="isContactSelected" class="profile-wrapper">
             <div class="profile-wrapper__left">
                 <div class="avatar-wrapper">
                     <img :src="getAvatar()" alt=""/>
@@ -16,6 +16,10 @@
                 <i class="fa-solid fa-paperclip"></i>
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
+        </div>
+
+        <div v-else>
+            <h1>select contact to start chat</h1>
         </div>
     </div>
 </template>
@@ -39,23 +43,17 @@ export default {
     },
     methods: {
         getName() {
-            if (this.contacts.length > 0) {
-                return this.contacts[this.selectedContact].name;
-            }
+            return this.contacts[this.selectedContact].name;
         },
         getAvatar() {
-            if (this.contacts.length > 0) {
-                return this.contacts[this.selectedContact].avatar;
-            }
+            return this.contacts[this.selectedContact].avatar;
         },
         getLastMsgTime() {
-            if (this.contacts.length > 0) {
-                const messages = this.contacts[this.selectedContact].messages;
-                //find last received message and return its date
-                for (let i = messages.length - 1; i > 0; i--) {
-                    if (messages[i].status === 'received') {
-                        return this.getReadableDate(messages[i].date)
-                    }
+            const messages = this.contacts[this.selectedContact].messages;
+            //find last received message and return its date
+            for (let i = messages.length - 1; i > 0; i--) {
+                if (messages[i].status === 'received') {
+                    return this.getReadableDate(messages[i].date)
                 }
             }
         },
@@ -74,10 +72,11 @@ export default {
 <style scoped>
 .header-container {
     background-color: var(--c-bg-white);
+    height: var(--profile-wrapper-height);
 }
 
 .profile-wrapper {
-    height: var(--profile-wrapper-height);
+    height: 100%;
     display: flex;
     justify-content: space-between;
     padding: var(--padding-header);

@@ -1,6 +1,6 @@
 <template>
     <div class="chat-container">
-        <div class="messages-container" v-for="(contact, index) in contacts" :key="index" >
+        <div class="messages-container" v-for="(contact, index) in contacts" :key="index" v-if="isContactSelected">
             <div class="first-message-date" v-if="index === selectedContact">
                 {{ getFirstMsgDate() }}
             </div>
@@ -16,6 +16,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div v-else>
+            <h1>select contact to start chat</h1>
         </div>
     </div>
 </template>
