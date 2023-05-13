@@ -92,6 +92,10 @@ export default {
     font-weight: bold;
 }
 
+.profile-last-access {
+    font-size: .8rem;
+}
+
 .profile-wrapper__right i {
     font-size: var(--ico-size);
 }

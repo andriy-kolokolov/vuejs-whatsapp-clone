@@ -54,12 +54,14 @@ export default {
 .chat-container {
     background-image: url("@/assets/img/mine.jpg");
     background-position: center;
-    padding: 20px 30px 0 30px;
+    /*padding: 20px 30px 0 30px;*/
 }
 
 .messages-container {
     display: flex;
     flex-direction: column;
+    max-width: 85%;
+    margin: 0 auto;
 }
 
 .first-message-date {
@@ -68,11 +70,12 @@ export default {
     border-radius: 5px;
     width: fit-content;
     align-self: center;
+    margin: 20px 0 10px 0;
 }
 
 .message {
     display: flex;
-    width: 350px;
+    max-width: 300px;
     padding: 10px;
     border-radius: 10px;
     margin-top: 10px;

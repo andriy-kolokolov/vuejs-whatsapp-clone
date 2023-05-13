@@ -10,11 +10,17 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 </script>
 
 <template>
+    <!--
+        TODO
+            -Move search contact input in <AsideHeader> component to fix scrollbar in <AsideContacts> issue
+            -After searching for contacts and selecting a contact, the wrong contact's chat is being rendered
+    -->
     <aside class="aside">
         <aside-header class="aside__header"/>
         <aside-contacts
                 class="aside__contacts"
                 :filtered-contacts="getFilteredContacts()"
+                :selected-contact="selectedContact"
                 @search="getSearchTerm"
                 @contact-click="selectContact"
         />

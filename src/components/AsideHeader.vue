@@ -45,7 +45,6 @@ export default {
 }
 
 .profile-wrapper__left {
-    flex-basis: 30%;
     display: flex;
     align-items: center;
 }
@@ -64,7 +63,12 @@ export default {
     font-size: var(--ico-size);
 }
 
+.avatar-wrapper {
+    height: 100%;
+}
+
 .avatar-wrapper img {
+    height: 100%;
     border-radius: 50%;
     width: 100%;
 }
@@ -85,7 +89,7 @@ export default {
 }
 
 .bell-wrapper {
-    padding: .5rem;
+    padding: .3rem;
     font-size: var(--ico-size);
     background-color: var(--c-bg-white);
     border-radius: 50%;

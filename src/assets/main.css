@@ -2,9 +2,13 @@
     --c-bg-body-top: #009587;
     --c-bg-body-bot: #dad9cf;
     --c-bg-white: white;
-    --aside-width: 400px;
+
+    --profile-wrapper-height: 80px;  /*    REFERS TO ASIDE HEADER PROFILE AND CHAT HEADER CONTACT PROFILE    */
+
+    --aside-width: 350px;
+    --aside-contact-height: 80px;  /*    CONTACT HEIGHT (CONTENT AND PARENT CONTAINER ADAPTS)    */
+
     --elements-padding: 10px;
-    --profile-wrapper-height: 80px;
     --padding-header: 10px;
     --ico-size: 1.4rem;
 

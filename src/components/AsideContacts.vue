@@ -22,6 +22,7 @@
                         class="contact"
                         v-for="(contact, index) in filteredContacts"
                         :key="index"
+                        :class="{ selected: isSelected(index), unselected: !isSelected(index) }"
                         @click="updateSelectedContact(index)"
                 >
                     <div class="contact-content">
@@ -51,12 +52,17 @@ export default {
     name: "AsideContacts",
     data() {
         return {
-            searchTerm: ''
+            searchTerm: '',
+            selectedIndex: 0
         }
     },
     props: {
         filteredContacts: {
             type: Array
+        },
+        selectedContact: {
+            type: Number,
+            required: true
         }
     },
     methods: {
@@ -64,6 +70,7 @@ export default {
             this.$emit('search', this.searchTerm);
         },
         updateSelectedContact(contactIndex) {
+            this.selectedIndex = contactIndex;
             this.$emit('contact-click', contactIndex);
         },
         convertToISO(dateString) {
@@ -80,6 +87,9 @@ export default {
             if (timeDiff < 3600) return `${Math.floor(timeDiff / 60)} minutes ago`;
             if (timeDiff < 86400) return `${Math.floor(timeDiff / 3600)} hours ago`;
             return `${Math.floor(timeDiff / 86400)} days ago`;
+        },
+        isSelected(index) {
+            return index === this.selectedIndex;
         }
     }
 }
@@ -87,8 +97,6 @@ export default {
 
 <style scoped>
 .contacts-container {
-    --contact-height: 80px;
-
     background-color: var(--c-bg-white);
 }
 
@@ -119,7 +127,7 @@ export default {
 }
 
 .contact {
-    height: var(--contact-height);
+    height: var(--aside-contact-height);
     display: flex;
     cursor: pointer;
     transition: var(--link-transition);
@@ -128,6 +136,11 @@ export default {
 
 .contact:hover {
     background-color: #b4d0e7;
+}
+
+.contact.selected {
+    transition: .5s;
+    background-color: #e3dcd3;
 }
 
 .contact-content {
