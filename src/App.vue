@@ -13,7 +13,9 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
     <!--
         TODO
             - after send message change status of chat interlocutor:
-            "delay -> online -> typing -> answer received -> update last seen date"
+                    "delay -> online -> typing -> answer received -> update last seen date".
+            - check if sending message is not empty before send
+            - fix last chat message delete error
     -->
     <aside class="aside">
         <aside-header class="aside__header"/>
@@ -102,7 +104,7 @@ export default {
         return {
             userName: 'Sofia',
             language: 'it',
-            isContactSelected: false,
+            isContactSelected: true,
             selectedContact: 0,
             searchTerm: '',
             tempSelectedContact: 0,  // temporary store contact ID to prevent sending message in wrong chat

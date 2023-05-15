@@ -5,14 +5,50 @@
                 {{ getFirstMsgDate() }}
             </div>
             <div v-if="index === idSelectedContact">
-                <div v-for="(message, index) in contact.messages" :key="index" class="message-wrap">
+                <div v-for="(message, index) in contact.messages" :key="index" class="message-wrap" :id="index">
                     <div v-if="message.status === 'sent'" class="message sent">
-                        <div class="message__txt">{{ message.message }}</div>
-                        <div class="message__date">{{ getReadableDate(message.date) }}</div>
+                        <div class="message__left">{{ message.message }}</div>
+                        <div class="message__right">
+                            <div class="dropdown">
+                                <button class="caret-msg-dropdown btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <button class="dropdown-item" @click="deleteMessage(index)">Delete</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" @click="deleteMessageForAll(2)">Delete for all
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>{{ getReadableDate(message.date) }}</div>
+                        </div>
                     </div>
                     <div v-else class="message received">
-                        <div class="message__txt">{{ message.message }}</div>
-                        <div class="message__date">{{ getReadableDate(message.date) }}</div>
+                        <div class="message__left">{{ message.message }}</div>
+                        <div class="message__right">
+                            <div class="dropdown">
+                                <button class="caret-msg-dropdown btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <button class="dropdown-item" @click="deleteMessage(index)">Delete</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" @click="deleteMessageForAll(2)">Delete for all
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>{{ getReadableDate(message.date) }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,6 +77,10 @@ export default {
         }
     },
     methods: {
+        deleteMessage(id) {
+            const messages = this.contacts[this.idSelectedContact].messages;
+            messages.splice(id, 1);
+        },
         getFirstMsgDate() {
             const messages = this.contacts[this.idSelectedContact].messages;
             return this.getReadableDate(messages[0].date);
@@ -93,18 +133,22 @@ export default {
     flex-wrap: wrap;
 }
 
-.message__txt {
+.message__left {
     flex: 1 1 70%;
     max-width: 100%;
     word-wrap: break-word;
 }
 
-.message__date {
+.message__right {
     font-size: .75rem;
     display: flex;
-    align-items: end;
-    justify-content: end;
+    flex-direction: column-reverse;
+    justify-content: space-between;
     flex: 1 1 30%;
+}
+
+.message__right div {
+    align-self: end;
 }
 
 .message.received {
@@ -126,11 +170,34 @@ export default {
 }
 
 .no-selected-contact__txt {
-    background-color: rgba(180, 208, 231, 0.6);
+    background-color: black;
+    opacity: var(--link-opacity);
     padding: 5px 15px;
     border-radius: 10px;
     font-size: 18px;
 }
 
+.caret-msg-dropdown {
+    border: 0;
+    padding: 0;
+    margin-top: 15px;
+    background-color: transparent;
+    color: black;
+    opacity: var(--link-opacity);
+    display: flex;
+}
+
+.caret-msg-dropdown i {
+    padding: 5px;
+}
+
+.caret-msg-dropdown:active {
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.caret-msg-dropdown:after {
+    display: none;
+}
 
 </style>
