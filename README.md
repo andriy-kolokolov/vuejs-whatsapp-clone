@@ -1,5 +1,6 @@
 # vue-boolzapp
 
+### --> To change reply messages language change String language in root component App.vue data() 
 Boolzapp - a (not very) innovative messaging platform
 
 ## Recommended IDE Setup
