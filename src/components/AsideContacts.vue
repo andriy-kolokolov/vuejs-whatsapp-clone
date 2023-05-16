@@ -33,13 +33,13 @@
                             <div class="contact-content__wrap-name-msg">
                                 <div class="contact-content__name">{{ contact.name }}</div>
                                 <div class="contact-content__message">
-                                    {{ contact.messages[contact.messages.length - 1].message }}
+                                    {{ contact.messages.length ? contact.messages[contact.messages.length - 1].message : '' }}
                                 </div>
                             </div>
                         </div>
                         <div class="contact-content-right">
                             <div class="contact-content__date">
-                                {{ getTimePassed(contact.messages[contact.messages.length - 1].date) }}
+                                {{ contact.messages.length ? getTimePassed(contact.messages[contact.messages.length - 1].date) : '' }}
                             </div>
                         </div>
                     </div>
