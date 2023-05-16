@@ -17,7 +17,7 @@
         </div>
 
         <div class="contacts-wrapper">
-            <div v-if="contacts.length > 0" class="contacts-wrapper__contacts" :style="{ width: '100%' }">
+            <div v-if="contacts.length > 0" class="contacts-wrapper__contacts">
                 <div
                         class="contact"
                         v-for="(contact, index) in contacts"
@@ -33,7 +33,7 @@
                             <div class="contact-content__wrap-name-msg">
                                 <div class="contact-content__name">{{ contact.name }}</div>
                                 <div class="contact-content__message">
-                                    {{ contact.messages.length ? contact.messages[contact.messages.length - 1].message : '' }}
+                                    {{ contact.messages.length ? contact.messages[contact.messages.length - 1].message : 'No messages yet...' }}
                                 </div>
                             </div>
                         </div>
@@ -114,6 +114,10 @@ export default {
 
 .contacts-wrapper {
     margin-top: 50px;;
+}
+
+.contacts-wrapper__contacts {
+    width: 100%;
 }
 
 .contacts__input-search {

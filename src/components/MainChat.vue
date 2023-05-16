@@ -1,9 +1,14 @@
 <template>
     <div class="chat-container">
+        <!--    CHAT IS EMPTY    -->
+        <div v-if="isContactSelected && isMsgArrayEmpty()" class="no-messages-in-chat">
+            <p class="no-messages-in-chat__txt">Chat is empty...</p>
+        </div>
         <div class="messages-container" v-for="(contact, index) in contacts" :key="index" v-if="isContactSelected">
-            <div class="first-message-date" v-if="index === idSelectedContact && isMessagesArrayEmpty">
+            <div class="first-message-date" v-if="index === idSelectedContact && contacts[index].messages.length !== 0">
                 {{ getFirstMsgDate() }}
             </div>
+            <!--    MESSAGES    -->
             <div v-if="index === idSelectedContact">
                 <div v-for="(message, index) in contact.messages" :key="index" class="message-wrap" :id="index">
                     <!--    SENT MESSAGE    -->
@@ -62,6 +67,7 @@
                 </div>
             </div>
         </div>
+        <!--    NO CONTACT SLECTED    -->
         <div v-else class="no-selected-contact">
             <p class="no-selected-contact__txt">Select contact to start chat...</p>
         </div>
@@ -111,9 +117,16 @@ export default {
             const options = {month: 'short', day: 'numeric', year: 'numeric'};
             return isoDate.toLocaleDateString('en-US', options);
         },
-        isMessagesArrayEmpty() {
-            return this.contacts[this.idSelectedContact].messages.length === 0;
-        }
+        isMsgArrayEmpty() {
+            if (this.isContactSelected) {
+                return this.contacts[this.idSelectedContact].messages.length === 0;
+            } else return false;
+        },
+        isContactsEmpty() {
+            if (this.isContactSelected) {
+                return this.contacts[this.idSelectedContact].length === 0;
+            } else return false;
+        },
     }
 }
 </script>
@@ -210,6 +223,24 @@ export default {
 .no-selected-contact__txt {
     color: white;
     background-color: rgba(0, 0, 0, 0.6);
+    opacity: var(--link-opacity);
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.no-messages-in-chat {
+    cursor: default;
+    display: grid;
+    place-items: center;
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.no-messages-in-chat__txt {
+    color: black;
+    background-color: rgb(207, 231, 241);
     opacity: var(--link-opacity);
     padding: 5px 15px;
     border-radius: 10px;

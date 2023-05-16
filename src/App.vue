@@ -10,11 +10,6 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
 </script>
 
 <template>
-    <!--
-        TODO
-            - after send message change status of chat interlocutor:
-                    "delay -> online -> typing -> answer received -> update last seen date".
-    -->
     <aside class="aside">
         <aside-header class="aside__header"/>
         <aside-contacts

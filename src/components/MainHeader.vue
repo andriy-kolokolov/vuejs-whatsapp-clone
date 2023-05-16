@@ -7,7 +7,7 @@
                 </div>
                 <div class="profile-info">
                     <div class="profile-name">{{ getName() }}</div>
-                    <div class="profile-last-access">last seen {{ getLastMsgTime() }}</div>
+                    <div v-if="contacts[idSelectedContact].messages.length !== 0" class="profile-last-access">last seen {{ getLastMsgTime() }}</div>
                 </div>
             </div>
 
