@@ -104,7 +104,7 @@ export default {
         return {
             userName: 'Sofia',
             language: 'it',
-            isContactSelected: true,
+            isContactSelected: false,
             selectedContact: 0,
             searchTerm: '',
             tempSelectedContact: 0,  // temporary store contact ID to prevent sending message in wrong chat

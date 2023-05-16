@@ -1,12 +1,13 @@
 <template>
     <div class="chat-container">
         <div class="messages-container" v-for="(contact, index) in contacts" :key="index" v-if="isContactSelected">
-            <div class="first-message-date" v-if="index === idSelectedContact">
+            <div class="first-message-date" v-if="index === idSelectedContact && isMessagesArrayEmpty">
                 {{ getFirstMsgDate() }}
             </div>
             <div v-if="index === idSelectedContact">
                 <div v-for="(message, index) in contact.messages" :key="index" class="message-wrap" :id="index">
-                    <div v-if="message.status === 'sent'" class="message sent">
+                    <!--    SENT MESSAGE    -->
+                    <div v-if="message.status === 'sent'" class="message sent" :id="index">
                         <div class="message__left">{{ message.message }}</div>
                         <div class="message__right">
                             <div class="dropdown">
@@ -20,7 +21,7 @@
                                         <button class="dropdown-item" @click="deleteMessage(index)">Delete</button>
                                     </li>
                                     <li>
-                                        <button class="dropdown-item" @click="deleteMessageForAll(2)">Delete for all
+                                        <button class="dropdown-item" @click="deleteMessageForAll(index)">Delete for all
                                         </button>
                                     </li>
                                 </ul>
@@ -28,7 +29,8 @@
                             <div>{{ getReadableDate(message.date) }}</div>
                         </div>
                     </div>
-                    <div v-else class="message received">
+                    <!--    RECEIVED MESSAGE    -->
+                    <div v-else-if="message.status === 'received'" class="message received" :id="index">
                         <div class="message__left">{{ message.message }}</div>
                         <div class="message__right">
                             <div class="dropdown">
@@ -42,13 +44,20 @@
                                         <button class="dropdown-item" @click="deleteMessage(index)">Delete</button>
                                     </li>
                                     <li>
-                                        <button class="dropdown-item" @click="deleteMessageForAll(2)">Delete for all
-                                        </button>
+                                        <button class="dropdown-item">Info</button>
                                     </li>
                                 </ul>
                             </div>
                             <div>{{ getReadableDate(message.date) }}</div>
                         </div>
+                    </div>
+                    <!--    DELETED RECIEVED MESSAGE    -->
+                    <div v-else-if="message.status === 'received deleted'" class="message received deleted">
+                        <div>{{ message.message }}</div>
+                    </div>
+                    <!--    DELETED SENT MESSAGE    -->
+                    <div v-else-if="message.status === 'sent deleted'" class="message sent deleted">
+                        <div>{{ message.message }}</div>
                     </div>
                 </div>
             </div>
@@ -81,9 +90,18 @@ export default {
             const messages = this.contacts[this.idSelectedContact].messages;
             messages.splice(id, 1);
         },
+        deleteMessageForAll(id) {
+            let messages = this.contacts[this.idSelectedContact].messages;
+            messages[id].message = 'You deleted this message';
+            messages[id].status += ' deleted';
+        },
         getFirstMsgDate() {
             const messages = this.contacts[this.idSelectedContact].messages;
-            return this.getReadableDate(messages[0].date);
+            if (messages.length !== 0) {
+                return this.getReadableDate(messages[0].date);
+            } else {
+                console.log("Messages are empty");
+            }
         },
         getReadableDate(dateString) {
             const [datePart, timePart] = dateString.split(' ');
@@ -92,6 +110,9 @@ export default {
             const isoDate = new Date(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}`);
             const options = {month: 'short', day: 'numeric', year: 'numeric'};
             return isoDate.toLocaleDateString('en-US', options);
+        },
+        isMessagesArrayEmpty() {
+            return this.contacts[this.idSelectedContact].messages.length === 0;
         }
     }
 }
@@ -99,6 +120,10 @@ export default {
 
 <style scoped>
 .chat-container {
+    --bg-c-msg-received: #fdfdfd;
+    --bg-c-msg-sent: #d3f7b9;
+
+
     background-image: url("@/assets/img/mine.jpg");
     background-position: center;
 }
@@ -152,12 +177,25 @@ export default {
 }
 
 .message.received {
-    background-color: #fdfdfd;
+    background-color: var(--bg-c-msg-received);
 }
 
 .message.sent {
-    background-color: #d3f7b9;
+    background-color: var(--bg-c-msg-sent);
     margin-left: auto;
+}
+
+/*.message.received.deleted {*/
+/*    background-color: var(--bg-c-msg-received);*/
+/*    font-style: italic;*/
+/*    color: rgba(0, 0, 0, 0.6);*/
+/*}*/
+
+.message.sent.deleted {
+    background-color: var(--bg-c-msg-sent);
+    margin-left: auto;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .no-selected-contact {
@@ -170,7 +208,8 @@ export default {
 }
 
 .no-selected-contact__txt {
-    background-color: black;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
     opacity: var(--link-opacity);
     padding: 5px 15px;
     border-radius: 10px;

@@ -48,12 +48,11 @@ export default {
     },
     methods: {
         sendMessage() {
-            if (this.isContactSelected) {
+            if (this.isContactSelected && this.userMessage !== '') {
                 this.$emit('send-message', this.userMessage);
                 this.userMessage = '';
             } else {
                 console.log('no chat selected')
-                // TODO SHOW POPUP "SELECT CONTACT"
             }
         }
     }
