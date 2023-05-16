@@ -17,10 +17,6 @@
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
         </div>
-
-<!--        <div v-else>-->
-<!--            <h1>select contact to start chat</h1>-->
-<!--        </div>-->
     </div>
 </template>
 
@@ -58,6 +54,7 @@ export default {
                     return this.getReadableDate(messages[i].date)
                 }
             }
+            return 'never'
         },
         getReadableDate(dateString) {
             const isoDate = DateTime.fromFormat(dateString, 'dd/MM/yyyy HH:mm:ss');

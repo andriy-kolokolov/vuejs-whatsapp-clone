@@ -7,6 +7,9 @@ import AsideContacts from "@/components/AsideContacts.vue";
 import MainHeader from "@/components/MainHeader.vue";
 import MainChat from "@/components/MainChat.vue";
 import MainMessageInput from "@/components/MainMessageInput.vue";
+import AddContactDialog from "@/components/UI/AddContactDialog.vue";
+import AddContactButton from "@/components/UI/AddContactButton.vue";
+
 </script>
 
 <template>
@@ -19,6 +22,10 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
                 :id-selected-contact="selectedContact"
                 @search="manageSearchInput"
                 @contact-click="selectContact"
+        />
+        <add-contact-button
+                class="aside__btn-add-contact"
+                @add-contact="showDialogAddContact"
         />
     </aside>
 
@@ -44,6 +51,12 @@ import MainMessageInput from "@/components/MainMessageInput.vue";
                 @send-message="addMessage"
         />
     </main>
+
+    <add-contact-dialog
+            :show="dialogAddContactVisible"
+            @hide-dialog-add-contact="hideDialogAddContact"
+            @add-contact="addNewContact"
+    />
 </template>
 
 <script>
@@ -52,6 +65,33 @@ import ReplyMessageGenerator from './util/ReplyMessageGenerator'
 
 export default {
     methods: {
+        addNewContact(name) {
+            const replyMsgGenerator = new ReplyMessageGenerator(this.userName, this.language);
+            this.contacts.push(
+                    {
+                        name: name,
+                        avatar: this.getRandomAvatar(),
+                        visible: true,
+                        messages: [
+                            {
+                                date: this.getCurrentDateTime(),
+                                message: `Ciao, ${this.userName}`,
+                                status: 'received'
+                            },
+                            {
+                                date: this.getCurrentDateTime(),
+                                message: replyMsgGenerator.getJoke(),
+                                status: 'received'
+                            }
+                        ],
+                    }
+            )
+        },
+        showDialogAddContact() {
+            this.dialogAddContactVisible = true;
+        }, hideDialogAddContact() {
+            this.dialogAddContactVisible = false;
+        },
         selectContact(selectedContactIndex) {
             // to change bg color of selected contact
             this.isContactSelected = true;
@@ -91,10 +131,15 @@ export default {
         },
         getCurrentDateTime() {
             return DateTime.local().toFormat('dd/MM/yyyy HH:mm:ss');
+        },
+        getRandomAvatar() {
+            const randInt = Math.floor(Math.random() * 8) + 1;
+            return `./src/assets/img/avatar_${randInt}.jpg`
         }
     },
     data() {
         return {
+            dialogAddContactVisible: false,
             userName: 'Sofia',
             language: 'it',
             isContactSelected: false,
@@ -281,6 +326,7 @@ export default {
 
 <style>
 .aside {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: var(--aside-width);
@@ -296,6 +342,15 @@ export default {
     flex: 1 1 auto;
     overflow: auto;
 }
+
+.aside__btn-add-contact {
+    position: absolute;
+    padding: 0;
+    bottom: 0;
+    right: 0;
+    transform: translate(-50%, -50%);
+}
+
 
 .main {
     display: flex;
