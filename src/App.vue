@@ -110,7 +110,7 @@ export default {
         addMessage(message) {
             // temporary store contact ID to prevent sending message in wrong chat
             this.tempSelectedContact = this.selectedContact
-            this.contacts[this.tempSelectedContact].messages.push(
+            this.getFilteredContacts()[this.tempSelectedContact].messages.push(
                     {
                         date: this.getCurrentDateTime(),
                         message: message,
@@ -121,7 +121,7 @@ export default {
         },
         requestReply() {
             const replyMsgGenerator = new ReplyMessageGenerator(this.userName, this.language)
-            this.contacts[this.tempSelectedContact].messages.push(
+            this.getFilteredContacts()[this.tempSelectedContact].messages.push(
                     {
                         date: this.getCurrentDateTime(),
                         message: replyMsgGenerator.getJoke(),

@@ -22,7 +22,7 @@
                         class="contact"
                         v-for="(contact, index) in contacts"
                         :key="index"
-                        :class="{ selected: isSelected(index), unselected: !isSelected(index) }"
+                        :class="{ selected: (index === this.idSelectedContact) , unselected: !(index === this.idSelectedContact) }"
                         @click="updateSelectedContact(index)"
                 >
                     <div class="contact-content">
@@ -63,8 +63,7 @@ export default {
     name: "AsideContacts",
     data() {
         return {
-            searchTerm: '',
-            selectedIndex: this.idSelectedContact
+            searchTerm: ''
         }
     },
     props: {
@@ -85,7 +84,6 @@ export default {
             this.$emit('search', this.searchTerm);
         },
         updateSelectedContact(contactIndex) {
-            this.selectedIndex = contactIndex;
             this.$emit('contact-click', contactIndex);
         },
         convertToISO(dateString) {
@@ -102,11 +100,6 @@ export default {
             if (timeDiff < 3600) return `${Math.floor(timeDiff / 60)} minutes ago`;
             if (timeDiff < 86400) return `${Math.floor(timeDiff / 3600)} hours ago`;
             return `${Math.floor(timeDiff / 86400)} days ago`;
-        },
-        isSelected(index) {
-            if (this.isContactSelected) {
-                return index === this.selectedIndex;
-            }
         }
     }
 }
