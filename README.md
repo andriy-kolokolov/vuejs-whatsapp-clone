@@ -1,4 +1,5 @@
-# vue-boolzapp
+# Vue js whatsap simple clone
+![Alt text](./src/assets/img/Screenshot_1.png)
 
 ### --> To change reply messages language change String language in root component App.vue data() 
 Boolzapp - a (not very) innovative messaging platform
